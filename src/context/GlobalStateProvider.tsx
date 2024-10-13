@@ -1,3 +1,4 @@
+"use client"
 import { CommonObjType, GlobalStateContextType } from "@/types/globalTypes";
 import { createContext, ReactNode, useContext, useState } from "react";
 
