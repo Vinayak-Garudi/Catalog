@@ -5,20 +5,26 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --foregroundHover: #474747;
+  --transparentColor: #ffffffcc;
+  --borderColor: #171717cc;
   --primary: #0d6efd;
   --primaryHover: #3586ff;
   --secondary: #6e42e5;
   --secondaryHover: #6e42e5bf;
   --success: #198754;
   --successHover: #2f855d;
-  --danger:#dc3545;
-  --dangerHover:#d54351;
+  --danger: #dc3545;
+  --dangerHover: #d54351;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --foregroundHover: #d3d3d3;
+    --transparentColor: #0a0a0acc;
+    --borderColor: #edededcc;
   }
 }
 
