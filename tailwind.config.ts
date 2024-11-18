@@ -12,6 +12,7 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         foregroundHover: "var(--foregroundHover)",
+        foregroundTextHover: "var(--foregroundTextHover)",
         transparentColor: "var(--transparentColor)",
         borderColor: "var(--borderColor)",
         primary: "var(--primary)",

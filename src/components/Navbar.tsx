@@ -9,9 +9,9 @@ const Navbar = () => {
   const [menuItems, setMenuItems] = useState<any[]>([]);
 
   useEffect(() => {
-    for (let i = 0; i < 20; i++) {
+    setMenuItems([]);
+    for (let i = 0; i < 7; i++) {
       if (nestedMenu) {
-        console.log("nestedMenu", nestedMenu);
         setMenuItems((data) => [
           ...data,
           {
@@ -30,7 +30,6 @@ const Navbar = () => {
           },
         ]);
       } else {
-        console.log("nestedMenu", nestedMenu);
         setMenuItems((data) => [
           ...data,
           {
@@ -47,7 +46,7 @@ const Navbar = () => {
       <header
         style={{
           backdropFilter: "blur(20px)",
-          borderBottom: "1px solid var(--borderColor)",
+          boxShadow: "var(--borderShadowBottom)",
         }}
         className="fixed h-16 w-screen bg-transparentColor text-foreground flex items-center z-40"
       >
@@ -62,10 +61,10 @@ const Navbar = () => {
           <div
             className="z-50 fixed h-screen bg-background text-foreground  w-screen lg:w-3/12"
             style={{
-              borderRight: "1px solid var(--borderColor)",
+              boxShadow: "var(--borderShadowRight)",
             }}
           >
-            <div className="fixed h-16 w-full flex items-center">
+            <div className="h-16 fixed w-screen lg:w-3/12 flex items-center">
               <Close
                 className="size-12 cursor-pointer hover:fill-foregroundHover"
                 onClick={() => setShowSidebar(false)}
@@ -73,24 +72,29 @@ const Navbar = () => {
               <div className="mx-4">My Company</div>
             </div>
 
-            {/* {nestedMenu ? (
+            {nestedMenu ? (
               <div>
                 {menuItems.map((data: any, i: number) => {
                   return <div key={i}></div>;
                 })}
               </div>
             ) : (
-              <div className="overflow-x-scroll">
+              <div
+                className="customScrollbar overflow-y-auto top-12 relative"
+                style={{ height: "calc(100% - 4rem)" }}
+              >
                 {menuItems.map((data: any, i: number) => {
                   return (
-                    <div key={i} className="flex gap-2">
-                      <div>{data.itemIcon}</div>
-                      <div>{data.itemName}</div>
+                    <div key={i} className="border-b-#17171721 border-b">
+                      <div className="flex items-end gap-2 h-16 ml-6 cursor-pointer text-foregroundHover hover:text-foregroundTextHover font-semibold">
+                        <div>{data.itemIcon}</div>
+                        <div>{data.itemName}</div>
+                      </div>
                     </div>
                   );
                 })}
               </div>
-            )} */}
+            )}
           </div>
           <div
             className="z-30 cursor-pointer h-screen w-screen fixed bg-transparentColor"

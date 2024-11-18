@@ -26,17 +26,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <GlobalStateProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <div>
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning={true}
+      >
+        <main>
+          <GlobalStateProvider>
             <Navbar />
             <main className="p-16">{children}</main>
-          </div>
-        </body>
-      </html>
-    </GlobalStateProvider>
+          </GlobalStateProvider>
+        </main>
+      </body>
+    </html>
   );
 }
