@@ -30,8 +30,8 @@ export default function NavbarComponent() {
 
   return (
     <Navbar
-      isBlurred={true}
-      isBordered={false}
+      isBlurred={false}
+      isBordered={true}
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent>
@@ -40,8 +40,7 @@ export default function NavbarComponent() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          Company
-          <p className="font-bold text-inherit">ACME</p>
+          <p className="font-bold text-inherit">Company</p>
         </NavbarBrand>
       </NavbarContent>
 

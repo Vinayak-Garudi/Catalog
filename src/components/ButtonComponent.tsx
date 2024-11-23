@@ -21,7 +21,7 @@ const ButtonComponent: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`px-4 py-2
+      className={`px-4 py-1
          rounded
          text-white
          ${

@@ -36,7 +36,9 @@ export default function RootLayout({
           <GlobalStateProvider>
             <Providers>
               <NavbarComponent />
-              <main className="p-16">{children}</main>
+              <main className="pt-16 flex flex-col justify-center items-center w-full flex-wrap px-4 lg:px-8">
+                {children}
+              </main>
             </Providers>
           </GlobalStateProvider>
         </main>
