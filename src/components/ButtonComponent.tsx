@@ -1,3 +1,4 @@
+import { Button } from "@nextui-org/react";
 import React from "react";
 
 interface ButtonProps {
@@ -6,6 +7,7 @@ interface ButtonProps {
   disabled?: boolean;
   className?: string;
   theme?: "primary" | "secondary" | "success" | "danger";
+  isLoading?: boolean;
 }
 
 const ButtonComponent: React.FC<React.PropsWithChildren<ButtonProps>> = ({
@@ -15,15 +17,17 @@ const ButtonComponent: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   className = "",
   children,
   theme = "primary",
+  isLoading = false,
 }) => {
   return (
-    <button
+    <Button
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`px-4 py-1
-         rounded
-         text-white
+      isLoading={isLoading}
+      radius="none"
+      className={`px-4 py-1 h-auto w-auto min-w-0
+         text-background
          ${
            theme === "primary"
              ? "bg-primary"
@@ -45,7 +49,7 @@ const ButtonComponent: React.FC<React.PropsWithChildren<ButtonProps>> = ({
          ${className}`}
     >
       {children}
-    </button>
+    </Button>
   );
 };
 

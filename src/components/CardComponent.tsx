@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Image, Tooltip } from "@nextui-org/react";
 import { IoOptionsSharp } from "react-icons/io5";
 
 interface CardInterface {
@@ -39,7 +39,11 @@ const CardComponent: React.FC<CardInterface> = ({
       </CardBody>
       <CardFooter className="text-small justify-between">
         <b>{title}</b>
-        <IoOptionsSharp onClick={() => console.log("inventory clicked")} />
+        <Tooltip showArrow={true} radius="none" content="Inventory">
+          <div>
+            <IoOptionsSharp onClick={() => console.log("inventory clicked")} />
+          </div>
+        </Tooltip>
       </CardFooter>
     </Card>
   );
