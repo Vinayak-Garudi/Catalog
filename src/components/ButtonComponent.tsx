@@ -2,12 +2,13 @@ import { Button } from "@nextui-org/react";
 import React from "react";
 
 interface ButtonProps {
-  onClick?: () => void;
+  onClick?: (e: any) => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   className?: string;
   theme?: "primary" | "secondary" | "success" | "danger";
   isLoading?: boolean;
+  isIconOnly?: boolean;
 }
 
 const ButtonComponent: React.FC<React.PropsWithChildren<ButtonProps>> = ({
@@ -18,15 +19,18 @@ const ButtonComponent: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   children,
   theme = "primary",
   isLoading = false,
+  isIconOnly = false,
 }) => {
   return (
-    <Button
-      type={type}
-      onClick={onClick}
-      disabled={disabled}
-      isLoading={isLoading}
-      radius="none"
-      className={`px-4 py-1 h-auto w-auto min-w-0
+    <>
+      {!isIconOnly ? (
+        <Button
+          type={type}
+          onClick={(e) => (onClick ? onClick(e) : "")}
+          disabled={disabled}
+          isLoading={isLoading}
+          radius="none"
+          className={`px-4 py-1 h-auto w-auto min-w-0
          text-background
          ${
            theme === "primary"
@@ -47,9 +51,13 @@ const ButtonComponent: React.FC<React.PropsWithChildren<ButtonProps>> = ({
             : "hover:bg-dangerHover"
         }
          ${className}`}
-    >
-      {children}
-    </Button>
+        >
+          {children}
+        </Button>
+      ) : (
+        <button className={className}>{children}</button>
+      )}
+    </>
   );
 };
 
