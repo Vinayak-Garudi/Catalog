@@ -20,13 +20,24 @@ const CardComponent: React.FC<CardInterface> = ({
   title = "",
 }) => {
   const [showInventory, setShowInventory] = React.useState(false);
+  const [inventorySaving, setInventorySaving] = React.useState(false);
+
+  function onInventorySave() {
+    setInventorySaving(true);
+    setTimeout(() => {
+      setInventorySaving(false);
+      setShowInventory(false);
+    }, 4000);
+  }
+
   return (
     <main>
       <InventoryModal
         title={title}
         isOpen={showInventory}
+        inventorySaving={inventorySaving}
         onClose={() => setShowInventory(false)}
-        onSave={() => setShowInventory(false)}
+        onSave={() => onInventorySave()}
       ></InventoryModal>
       <Card
         shadow="sm"
