@@ -27,7 +27,7 @@ const ButtonComponent: React.FC<React.PropsWithChildren<ButtonProps>> = ({
         <Button
           type={type}
           onClick={(e) => (onClick ? onClick(e) : "")}
-          disabled={disabled}
+          isDisabled={disabled}
           isLoading={isLoading}
           radius="none"
           className={`px-4 py-1 h-auto w-auto min-w-0
