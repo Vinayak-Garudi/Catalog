@@ -6,11 +6,10 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Skeleton,
 } from "@nextui-org/react";
 import React from "react";
 import ButtonComponent from "./ButtonComponent";
-import SliderComponent from "./SliderComponent";
+import SizeTabsComponent from "./SizeTabsComponent";
 import InputComponent from "./InputComponent";
 
 interface InventoryModalProps {
@@ -20,6 +19,11 @@ interface InventoryModalProps {
   onSave: () => void;
   title: string;
   type?: string;
+}
+
+interface sizesObjProps {
+  label: string | number;
+  quantity: number;
 }
 
 const InventoryModal: React.FC<
@@ -32,61 +36,108 @@ const InventoryModal: React.FC<
   title,
   type = "products",
 }) => {
-  const sizes = [
+  const sizes: sizesObjProps[] = [
     {
-      value: 0,
       label: "XS",
+      quantity: 0,
     },
     {
-      value: 1,
-      label: "S",
-    },
-    {
-      value: 2,
       label: "M",
+      quantity: 0,
     },
     {
-      value: 3,
       label: "L",
+      quantity: 0,
     },
     {
-      value: 4,
       label: "XL",
+      quantity: 0,
     },
     {
-      value: 5,
       label: "2XL",
+      quantity: 0,
     },
     {
-      value: 6,
       label: "3XL",
+      quantity: 0,
     },
     {
-      value: 7,
-      label: "4XL",
+      label: "5XL",
+      quantity: 0,
     },
     {
-      value: 8,
-      label: "Total",
-      isReadOnly: true,
+      label: "7XL",
+      quantity: 0,
+    },
+    {
+      label: "9XL",
+      quantity: 0,
+    },
+    {
+      label: 28,
+      quantity: 0,
+    },
+    {
+      label: 30,
+      quantity: 0,
+    },
+    {
+      label: 32,
+      quantity: 0,
+    },
+    {
+      label: 34,
+      quantity: 0,
+    },
+    {
+      label: 36,
+      quantity: 0,
+    },
+    {
+      label: 38,
+      quantity: 0,
+    },
+    {
+      label: 40,
+      quantity: 0,
+    },
+    {
+      label: 42,
+      quantity: 0,
+    },
+    {
+      label: 44,
+      quantity: 0,
+    },
+    {
+      label: 46,
+      quantity: 0,
+    },
+    {
+      label: 48,
+      quantity: 0,
+    },
+    {
+      label: 50,
+      quantity: 0,
+    },
+    {
+      label: 52,
+      quantity: 0,
     },
   ];
 
-  const [selectedSize, setSelectedSize] = React.useState(sizes[0].label);
   const [loading, setLoading] = React.useState(true);
+  const [sizesArray, setSizesArray] = React.useState(sizes);
 
   React.useEffect(() => {
     setLoading(true);
     if (isOpen) {
       setTimeout(() => {
         setLoading(false);
-      }, 2000);
+      }, 500);
     }
   }, [isOpen]);
-
-  function handleSizeChange(e: number) {
-    setSelectedSize(sizes[e].label);
-  }
 
   return (
     <Modal size="md" radius="sm" isOpen={isOpen} onClose={onClose}>
@@ -95,38 +146,12 @@ const InventoryModal: React.FC<
           <>
             <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
             <ModalBody>
-              <div className="flex justify-center">
-                {!loading ? (
-                  <InputComponent
-                    type="number"
-                    label={
-                      selectedSize === "Total"
-                        ? "Total Quantity"
-                        : "Enter Quantity"
-                    }
-                    isReadOnly={selectedSize === "Total"}
-                    isDisabled={selectedSize === "Total"}
-                    className="w-2/3"
-                  />
-                ) : (
-                  <Skeleton className="w-2/3 h-12 rounded-sm">
-                    <div className="h-full w-full rounded-sm bg-default-200"></div>
-                  </Skeleton>
-                )}
-              </div>
-              {!loading ? (
-                <SliderComponent
-                  label="Select a size"
-                  marks={sizes}
-                  maxValue={sizes.length - 1}
-                  getValue={(val) => sizes[Number(val)].label}
-                  onChange={(e) => handleSizeChange(e)}
-                />
-              ) : (
-                <Skeleton className="w-full h-16 rounded-sm">
-                  <div className="h-full w-full rounded-sm bg-default-200"></div>
-                </Skeleton>
-              )}
+              <InputComponent
+                type="number"
+                label="Enter Quantity"
+                className="absolute right-8 w-1/2"
+              />
+              <SizeTabsComponent sizesArray={sizesArray} />
             </ModalBody>
             <ModalFooter>
               <Button color="danger" variant="light" onPress={onClose}>

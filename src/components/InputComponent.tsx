@@ -13,6 +13,7 @@ interface inputProps {
   isReadOnly?: boolean;
   isDisabled?: boolean;
   isInvalid?: boolean;
+  value?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onClear?: () => void;
   className?: string;
@@ -30,6 +31,7 @@ const InputComponent: React.FC<React.PropsWithChildren<inputProps>> = ({
   isReadOnly = false,
   isDisabled = false,
   isInvalid = false,
+  value = "",
   onChange,
   onClear,
   className,
@@ -47,6 +49,7 @@ const InputComponent: React.FC<React.PropsWithChildren<inputProps>> = ({
       isReadOnly={isReadOnly}
       isDisabled={isDisabled}
       isInvalid={isInvalid}
+      value={value}
       onChange={onChange}
       onClear={onClear}
       className={className}
