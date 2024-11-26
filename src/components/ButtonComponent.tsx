@@ -26,7 +26,7 @@ const ButtonComponent: React.FC<React.PropsWithChildren<ButtonProps>> = ({
       {!isIconOnly ? (
         <Button
           type={type}
-          onClick={(e) => (onClick ? onClick(e) : "")}
+          onClick={onClick}
           isDisabled={disabled}
           isLoading={isLoading}
           radius="none"

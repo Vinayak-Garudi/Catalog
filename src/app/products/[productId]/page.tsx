@@ -1,3 +1,7 @@
+import React from "react";
+import ButtonComponent from "@/components/ButtonComponent";
+import HeaderSection from "@/components/HeaderSection";
+
 interface ProductPageProps {
   params: {
     productId: string;
@@ -9,9 +13,11 @@ const ProductPage = ({ params }: ProductPageProps) => {
   const idForUpdate: boolean = productId !== "add";
 
   return (
-    <div>
-      <h1>Product ID: {idForUpdate ? productId : ""}</h1>
-    </div>
+    <main className="w-full">
+      <HeaderSection header={`${idForUpdate ? "Edit" : "Add new"} product`}>
+        <ButtonComponent>Save</ButtonComponent>
+      </HeaderSection>
+    </main>
   );
 };
 

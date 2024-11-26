@@ -15,10 +15,10 @@ const SizeTabsComponent: React.FC<React.PropsWithChildren<sizeTabsProps>> = ({
 }) => {
   return (
     <div className="flex w-full flex-col">
-      <Tabs>
+      <Tabs radius="sm">
         <Tab title="Text">
           <div className="flex w-full flex-col">
-            <Tabs>
+            <Tabs radius="sm" className="-ml-1 mr-1">
               {sizesArray.map((size: sizesObjProps, i: number) => {
                 return !Number(size.label) ? (
                   <Tab key={i} title={size.label}></Tab>
@@ -31,7 +31,7 @@ const SizeTabsComponent: React.FC<React.PropsWithChildren<sizeTabsProps>> = ({
         </Tab>
         <Tab title="in">
           <div className="flex w-full flex-col">
-            <Tabs>
+            <Tabs radius="sm" className="-ml-1 mr-1">
               {sizesArray.map((size: sizesObjProps, i: number) => {
                 return Number(size.label) ? (
                   <Tab key={i} title={size.label}></Tab>

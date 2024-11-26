@@ -6,6 +6,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Skeleton,
 } from "@nextui-org/react";
 import React from "react";
 import ButtonComponent from "./ButtonComponent";
@@ -135,7 +136,7 @@ const InventoryModal: React.FC<
     if (isOpen) {
       setTimeout(() => {
         setLoading(false);
-      }, 500);
+      }, 2000);
     }
   }, [isOpen]);
 
@@ -146,12 +147,24 @@ const InventoryModal: React.FC<
           <>
             <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
             <ModalBody>
-              <InputComponent
-                type="number"
-                label="Enter Quantity"
-                className="absolute right-8 w-1/2"
-              />
-              <SizeTabsComponent sizesArray={sizesArray} />
+              {!loading ? (
+                <InputComponent
+                  type="number"
+                  label="Enter Quantity"
+                  className="absolute right-8 w-1/2"
+                />
+              ) : (
+                <Skeleton className="rounded-sm">
+                  <div className="h-12 right-8 w-1/2 rounded-sm bg-default-300"></div>
+                </Skeleton>
+              )}
+              {!loading ? (
+                <SizeTabsComponent sizesArray={sizesArray} />
+              ) : (
+                <Skeleton className="rounded-sm">
+                  <div className="h-11 rounded-sm bg-default-300"></div>
+                </Skeleton>
+              )}
             </ModalBody>
             <ModalFooter>
               <Button color="danger" variant="light" onPress={onClose}>
