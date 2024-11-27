@@ -1,6 +1,7 @@
 "use client";
 import {
   Button,
+  Chip,
   Modal,
   ModalBody,
   ModalContent,
@@ -145,7 +146,12 @@ const InventoryModal: React.FC<
       <ModalContent>
         {(onClose) => (
           <>
-            <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
+            <ModalHeader className="flex gap-4">
+              <span>{title}</span>
+              <Chip color="primary" size="sm">
+                46729
+              </Chip>
+            </ModalHeader>
             <ModalBody>
               {!loading ? (
                 <InputComponent
