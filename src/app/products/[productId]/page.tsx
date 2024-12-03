@@ -10,7 +10,7 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react";
-import InputComponent from "@/components/InputComponent";
+import TextareaComponent from "@/components/TextareaComponent";
 
 interface ProductPageProps {
   params: {
@@ -30,7 +30,7 @@ const ProductPage = ({ params }: ProductPageProps) => {
       </HeaderSection>
 
       <div className="flex justify-center gap-2 lg:flex-nowrap flex-wrap">
-        <Card radius="none" className="w-full lg:w-8/12">
+        <Card radius="none" className="w-full h-full lg:w-8/12">
           <CardHeader className="flex gap-3">
             <div className="flex flex-col">
               <p className="text-md">Product Details</p>
@@ -83,7 +83,11 @@ const ProductPage = ({ params }: ProductPageProps) => {
               <div className="flex justify-evenly gap-2 lg:flex-nowrap flex-wrap w-full">
                 <div className="w-full lg:w-2/12">Description</div>
                 <div className="w-full lg:w-10/12">
-                  <InputComponent placeholder="Description" />
+                  <TextareaComponent
+                    placeholder="Product Description"
+                    minRows={5}
+                    maxRows={5}
+                  />
                 </div>
               </div>
             </div>
@@ -91,7 +95,37 @@ const ProductPage = ({ params }: ProductPageProps) => {
           <Divider />
         </Card>
 
-        <div className="w-full lg:w-4/12">Images Section</div>
+        <Card radius="none" className="w-full lg:w-4/12">
+          <CardHeader className="flex gap-3 justify-between">
+            <div className="flex flex-col">
+              <p className="text-md">Product Images</p>
+            </div>
+            <div className="flex gap-2">
+              <ButtonComponent>Edit</ButtonComponent>
+              <ButtonComponent>Add</ButtonComponent>
+            </div>
+          </CardHeader>
+          <Divider />
+          <CardBody className="h-48">
+            {false ? (
+              <div className="w-full h-full flex justify-center items-center">
+                No Images Uploaded
+              </div>
+            ) : (
+              <div className="w-full h-full flex gap-x-2">
+                <div className="min-w-40 h-40 border-dashed border border-foregroundTextHover hover:border-primaryHover">
+                  hi
+                </div>
+                <div className="min-w-40 h-40 border-dashed border border-foregroundTextHover hover:border-primaryHover">
+                  hi
+                </div>
+                <div className="min-w-40 h-40 border-dashed border border-foregroundTextHover hover:border-primaryHover">
+                  hi
+                </div>
+              </div>
+            )}
+          </CardBody>
+        </Card>
       </div>
     </main>
   );
