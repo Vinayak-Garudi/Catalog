@@ -25,8 +25,16 @@ const ProductPage = ({ params }: ProductPageProps) => {
 
   return (
     <main className="w-full">
-      <HeaderSection header={`${idForUpdate ? "Edit" : "Add new"} product`}>
-        <ButtonComponent>Save</ButtonComponent>
+      <HeaderSection
+        header={`${
+          true ? `${idForUpdate ? "Edit" : "Add new"} product` : `Product Name`
+        }`}
+      >
+        {true ? (
+          <ButtonComponent>Save</ButtonComponent>
+        ) : (
+          <ButtonComponent>Add</ButtonComponent>
+        )}
       </HeaderSection>
 
       <div className="flex justify-center gap-2 lg:flex-nowrap flex-wrap">

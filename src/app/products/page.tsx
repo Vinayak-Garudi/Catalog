@@ -4,7 +4,6 @@ import ButtonComponent from "@/components/ButtonComponent";
 import CardComponent from "@/components/CardComponent";
 import HeaderSection from "@/components/HeaderSection";
 import { IoSearch } from "react-icons/io5";
-import { Tooltip } from "@nextui-org/react";
 import { usePathname, useRouter } from "next/navigation";
 
 const Products = () => {
@@ -16,16 +15,16 @@ const Products = () => {
   return (
     <main className="w-full">
       <HeaderSection header="Products">
-        <Tooltip showArrow={true} radius="none" content="Search for products">
-          <div>
-            <ButtonComponent
-              isIconOnly
-              className="hover:text-foregroundHover h-full w-full"
-            >
-              <IoSearch />
-            </ButtonComponent>
-          </div>
-        </Tooltip>
+        {/* <Tooltip showArrow={true} radius="none" content="Search for products"> */}
+        <div>
+          <ButtonComponent
+            isIconOnly
+            className="hover:text-foregroundHover h-full w-full"
+          >
+            <IoSearch />
+          </ButtonComponent>
+        </div>
+        {/* </Tooltip> */}
         <ButtonComponent onClick={() => router.push(`${currentRoute}/add`)}>
           Add
         </ButtonComponent>

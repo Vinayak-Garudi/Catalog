@@ -3,6 +3,7 @@ import React from "react";
 import { Card, CardBody, CardFooter, Image, Tooltip } from "@nextui-org/react";
 import { IoOptionsSharp } from "react-icons/io5";
 import InventoryModal from "./InventoryModal";
+import { MdLibraryAdd } from "react-icons/md";
 
 interface CardInterface {
   onPress?: () => void;
@@ -45,9 +46,8 @@ const CardComponent: React.FC<CardInterface> = ({
         isHoverable
         isPressable
         className={`min-h-56 min-w-[40vw] lg:min-w-52 lg:min-h-72 ${className}`}
-        onClick={onPress}
       >
-        <CardBody className="overflow-visible p-0 h-full">
+        <CardBody onClick={onPress} className="overflow-visible p-0 h-full">
           <Image
             shadow="sm"
             radius="none"
@@ -59,15 +59,27 @@ const CardComponent: React.FC<CardInterface> = ({
         </CardBody>
         <CardFooter className="text-small justify-between">
           <b>{title}</b>
-          <Tooltip showArrow={true} radius="none" content="Inventory">
+          <Tooltip
+            showArrow={true}
+            radius="none"
+            content={true ? "Inventory" : "Add Product"}
+          >
             <div>
-              <IoOptionsSharp
-                className="hover:text-foregroundHover h-full w-full"
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent triggering Card's onClick
-                  setShowInventory(true);
-                }}
-              />
+              {true ? (
+                <IoOptionsSharp
+                  size={20}
+                  className="hover:text-foregroundHover h-full w-full"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent triggering Card's onClick
+                    setShowInventory(true);
+                  }}
+                />
+              ) : (
+                <MdLibraryAdd
+                  size={20}
+                  className="hover:text-foregroundHover h-full w-full"
+                />
+              )}
             </div>
           </Tooltip>
         </CardFooter>
