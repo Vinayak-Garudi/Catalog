@@ -8,6 +8,9 @@ export default function Dashboard() {
       <Link href={"/products"}>
         <ButtonComponent>Products</ButtonComponent>
       </Link>
+      <Link href={"/purchaseRequests"}>
+        <ButtonComponent>Purchase Requests</ButtonComponent>
+      </Link>
     </main>
   );
 }
