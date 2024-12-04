@@ -7,6 +7,9 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Skeleton,
 } from "@nextui-org/react";
 import React from "react";
@@ -131,6 +134,7 @@ const InventoryModal: React.FC<
 
   const [loading, setLoading] = React.useState(true);
   const [sizesArray, setSizesArray] = React.useState(sizes);
+  const [popOverOpen, setPopOverOpen] = React.useState(false);
 
   React.useEffect(() => {
     setLoading(true);
@@ -156,6 +160,7 @@ const InventoryModal: React.FC<
               {!loading ? (
                 <InputComponent
                   type="number"
+                  isReadOnly={false}
                   label="Enter Quantity"
                   className="absolute right-8 w-1/2"
                 />
@@ -173,16 +178,64 @@ const InventoryModal: React.FC<
               )}
             </ModalBody>
             <ModalFooter>
-              <Button color="danger" variant="light" onPress={onClose}>
-                Close
-              </Button>
-              <ButtonComponent
-                disabled={loading}
-                isLoading={inventorySaving}
-                onClick={onSave}
-              >
-                Save
-              </ButtonComponent>
+              {true ? (
+                <Button color="danger" variant="light" onPress={onClose}>
+                  Close
+                </Button>
+              ) : (
+                <>
+                  <Popover
+                    placement="top"
+                    isOpen={popOverOpen}
+                    onOpenChange={(open) => setPopOverOpen(open)}
+                    showArrow={true}
+                  >
+                    <PopoverTrigger>
+                      <Button
+                        onPress={() => setPopOverOpen(true)}
+                        color="danger"
+                        variant="light"
+                      >
+                        Delete
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <div className="px-1 py-2">
+                        <div className="text-small font-bold">
+                          Are you sure?
+                        </div>
+                        <div className="text-tiny flex gap-1">
+                          <Button
+                            color="primary"
+                            variant="light"
+                            onPress={() => setPopOverOpen(false)}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            color="danger"
+                            variant="light"
+                            onPress={onClose}
+                          >
+                            Delete
+                          </Button>
+                        </div>
+                      </div>
+                    </PopoverContent>
+                  </Popover>
+                </>
+              )}
+              {true ? (
+                <ButtonComponent
+                  disabled={loading}
+                  isLoading={inventorySaving}
+                  onClick={onSave}
+                >
+                  Save
+                </ButtonComponent>
+              ) : (
+                ""
+              )}
             </ModalFooter>
           </>
         )}
