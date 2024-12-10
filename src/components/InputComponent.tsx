@@ -36,6 +36,17 @@ const InputComponent: React.FC<React.PropsWithChildren<inputProps>> = ({
   onClear,
   className,
 }) => {
+  const handleClear = () => {
+    if (onClear) {
+      onClear();
+    } else if (onChange) {
+      // Trigger onChange with an empty value to clear the parent's state
+      onChange({
+        target: { value: "" },
+      } as React.ChangeEvent<HTMLInputElement>);
+    }
+  };
+
   return (
     <Input
       size={size}
@@ -49,9 +60,9 @@ const InputComponent: React.FC<React.PropsWithChildren<inputProps>> = ({
       isReadOnly={isReadOnly}
       isDisabled={isDisabled}
       isInvalid={isInvalid}
-      value={value}
+      value={value} // Controlled component
       onChange={onChange}
-      onClear={onClear}
+      onClear={handleClear} // Handles clearing
       className={className}
     />
   );

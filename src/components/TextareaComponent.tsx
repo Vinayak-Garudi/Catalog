@@ -8,6 +8,8 @@ interface TextAreaProps {
   placeholder?: string;
   minRows?: number;
   maxRows?: number;
+  value?: string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   className?: string;
 }
 
@@ -18,6 +20,8 @@ const TextareaComponent: React.FC<React.PropsWithChildren<TextAreaProps>> = ({
   placeholder = "",
   minRows = 3,
   maxRows = 8,
+  value = "",
+  onChange,
   className = "",
 }) => {
   return (
@@ -28,6 +32,8 @@ const TextareaComponent: React.FC<React.PropsWithChildren<TextAreaProps>> = ({
       placeholder={placeholder}
       minRows={minRows}
       maxRows={maxRows}
+      value={value}
+      onChange={onChange}
       className={`col-span-12 md:col-span-6 mb-6 md:mb-0 ${className}`}
     />
   );
