@@ -42,7 +42,7 @@ const InputComponent: React.FC<React.PropsWithChildren<inputProps>> = ({
     } else if (onChange) {
       // Trigger onChange with an empty value to clear the parent's state
       onChange({
-        target: { value: "" },
+        target: { value: type === "number" ? 0 : "" },
       } as React.ChangeEvent<HTMLInputElement>);
     }
   };
