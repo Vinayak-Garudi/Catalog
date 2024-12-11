@@ -5,6 +5,9 @@ import HeaderSection from "@/components/HeaderSection";
 import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react";
 import TextareaComponent from "@/components/TextareaComponent";
 import InputComponent from "@/components/InputComponent";
+import QRCode from "react-qr-code";
+import JsBarcode from "jsbarcode";
+import { generateUID } from "@/utils/generalFunctions";
 
 interface ProductPageProps {
   params: {
@@ -20,11 +23,14 @@ interface formProps {
   color: string;
   sellingTag: string;
   description: string;
+  _id: string | null;
+  uniqueId: string | null;
 }
 
 const ProductPage = ({ params }: ProductPageProps) => {
   const { productId } = params;
   const idForUpdate: boolean = productId !== "add";
+  const barcodeRef = React.useRef<SVGSVGElement>(null);
   const [formValues, setFormValues] = React.useState<formProps>({
     productName: "",
     type: "",
@@ -33,7 +39,10 @@ const ProductPage = ({ params }: ProductPageProps) => {
     color: "",
     sellingTag: "",
     description: "",
+    _id: null,
+    uniqueId: null,
   });
+  const formValuesRef = React.useRef(formValues);
 
   function handleFormValues(value: any, key: string) {
     setFormValues((val) => {
@@ -45,8 +54,27 @@ const ProductPage = ({ params }: ProductPageProps) => {
   }
 
   function saveProduct() {
-    console.log("formValues", formValues);
+    const formObj = {
+      ...formValues,
+      _id: idForUpdate ? productId : generateUID(),
+      uniqueId: idForUpdate ? productId : generateUID(),
+    };
+    setFormValues(formObj);
+    formValuesRef.current = formObj;
+    console.log("formValues", formValues, formValuesRef.current);
   }
+
+  React.useEffect(() => {
+    if (barcodeRef.current && idForUpdate) {
+      JsBarcode(barcodeRef.current, productId, {
+        format: "CODE128", // Barcode format
+        lineColor: "#000", // Color of the bars
+        width: 2, // Width of each bar
+        height: 100, // Height of the barcode
+        displayValue: true, // Display the text below the barcode
+      });
+    }
+  }, [idForUpdate]);
 
   return (
     <main className="w-full">
@@ -61,6 +89,10 @@ const ProductPage = ({ params }: ProductPageProps) => {
           <ButtonComponent>Add</ButtonComponent>
         )}
       </HeaderSection>
+
+      {/* <QRCode value={productId} /> */}
+
+      {/* {idForUpdate ? <svg ref={barcodeRef} /> : ""} */}
 
       <div className="flex justify-center gap-2 lg:flex-nowrap flex-wrap">
         <Card radius="none" className="w-full lg:w-4/12 h-fit">
