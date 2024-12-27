@@ -14,6 +14,8 @@ interface inputProps {
   isDisabled?: boolean;
   isInvalid?: boolean;
   value?: any;
+  labelPlacement?: "inside" | "outside" | "outside-left";
+  endContent?: any;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onClear?: () => void;
   className?: string;
@@ -32,11 +34,16 @@ const InputComponent: React.FC<React.PropsWithChildren<inputProps>> = ({
   isDisabled = false,
   isInvalid = false,
   value = "",
+  labelPlacement = "inside",
+  endContent = "",
   onChange,
   onClear,
   className,
 }) => {
   const handleClear = () => {
+    if (!isClearable) {
+      return;
+    }
     if (onClear) {
       onClear();
     } else if (onChange) {
@@ -61,6 +68,8 @@ const InputComponent: React.FC<React.PropsWithChildren<inputProps>> = ({
       isDisabled={isDisabled}
       isInvalid={isInvalid}
       value={value} // Controlled component
+      labelPlacement={labelPlacement}
+      endContent={endContent}
       onChange={onChange}
       onClear={handleClear} // Handles clearing
       className={className}
