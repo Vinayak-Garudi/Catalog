@@ -11,82 +11,114 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
+import { usePathname, useRouter } from "next/navigation";
+import { handleLogOut } from "@/utils/auth";
+
+interface menuProps {
+  key: string;
+  href?: string;
+}
 
 export default function NavbarComponent() {
+  const pathName = usePathname();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [mobileMenuItems, setMobileMenuItems] = React.useState<menuProps[]>([
+    {
+      key: "Dashboard",
+      href: "/",
+    },
+    {
+      key: "Products",
+      href: "/products",
+    },
+    {
+      key: "Purchase Requests",
+      href: "/purchaseRequests",
+    },
+    {
+      key: "Sales",
+      href: "/sales",
+    },
+  ]);
+  const [desktopMenuItems, setDesktopMenuItems] = React.useState<menuProps[]>([
+    {
+      key: "Dashboard",
+      href: "/",
+    },
+    {
+      key: "Products",
+      href: "/products",
+    },
+    {
+      key: "Purchase Requests",
+      href: "/purchaseRequests",
+    },
+    {
+      key: "Sales",
+      href: "/sales",
+    },
+  ]);
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+  function getCurrentRoute(route: menuProps): boolean {
+    return pathName === route.href;
+  }
 
   return (
-    <Navbar
-      isBlurred={false}
-      isBordered={true}
-      onMenuOpenChange={setIsMenuOpen}
-    >
+    <Navbar isBlurred={true} isBordered={true} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
+          className={`sm:hidden ${pathName === "/SignUp" ? "invisible" : ""}`}
         />
         <NavbarBrand>
-          <p className="font-bold text-inherit">Company</p>
+          <p className="font-bold text-inherit">Catalog</p>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
+        {desktopMenuItems.map((item: menuProps, i: number) => {
+          return (
+            <NavbarItem
+              className={`${pathName === "/SignUp" ? "invisible" : ""}`}
+              key={i}
+              isActive={getCurrentRoute(item)}
+            >
+              <Link
+                color={!getCurrentRoute(item) ? "foreground" : "primary"}
+                href={item.href}
+              >
+                {item.key}
+              </Link>
+            </NavbarItem>
+          );
+        })}
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
+          <Button
+            color="danger"
+            onClick={() => {
+              handleLogOut();
+              router.push("/SignUp");
+            }}
+            variant="light"
+            className={`${pathName === "/SignUp" ? "invisible" : ""}`}
+          >
+            Log Out
           </Button>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
+        {mobileMenuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
+              color={getCurrentRoute(item) ? "primary" : "foreground"}
               className="w-full"
-              href="#"
+              href={item.href ?? "#"}
               size="lg"
             >
-              {item}
+              {item.key}
             </Link>
           </NavbarMenuItem>
         ))}
