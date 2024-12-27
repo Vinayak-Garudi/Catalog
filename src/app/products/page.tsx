@@ -16,14 +16,14 @@ const Products = () => {
     <main className="w-full">
       <HeaderSection header="Products">
         {/* <Tooltip showArrow={true} radius="none" content="Search for products"> */}
-        <div>
+        {/* <div>
           <ButtonComponent
             isIconOnly
             className="hover:text-foregroundHover h-full w-full"
           >
             <IoSearch />
           </ButtonComponent>
-        </div>
+        </div> */}
         {/* </Tooltip> */}
         <ButtonComponent onClick={() => router.push(`${currentRoute}/add`)}>
           Add

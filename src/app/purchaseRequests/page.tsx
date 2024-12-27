@@ -14,14 +14,14 @@ const PurchaseRequests = () => {
     <main className="w-full">
       <HeaderSection header="Purchase Requests">
         {/* <Tooltip showArrow={true} radius="none" content="Search for products"> */}
-        <div>
+        {/* <div>
           <ButtonComponent
             isIconOnly
             className="hover:text-foregroundHover h-full w-full"
           >
             <IoSearch />
           </ButtonComponent>
-        </div>
+        </div> */}
         {/* </Tooltip> */}
         <ButtonComponent onClick={() => router.push(`products`)}>
           Add
