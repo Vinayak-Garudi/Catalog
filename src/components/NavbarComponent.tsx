@@ -65,7 +65,11 @@ export default function NavbarComponent() {
   }
 
   return (
-    <Navbar isBlurred={true} isBordered={true} onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      isBlurred={false}
+      isBordered={true}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
