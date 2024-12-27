@@ -23,6 +23,8 @@ interface formProps {
   color: string;
   sellingTag: string;
   description: string;
+  qr: string;
+  barcode: string;
   _id: string | null;
   uniqueId: string | null;
 }
@@ -30,6 +32,7 @@ interface formProps {
 const ProductPage = ({ params }: ProductPageProps) => {
   const { productId } = params;
   const idForUpdate: boolean = productId !== "add";
+  const currentURL: string = window.location.href.split(productId)[0];
   const barcodeRef = React.useRef<SVGSVGElement>(null);
   const [formValues, setFormValues] = React.useState<formProps>({
     productName: "",
@@ -39,6 +42,8 @@ const ProductPage = ({ params }: ProductPageProps) => {
     color: "",
     sellingTag: "",
     description: "",
+    qr: "",
+    barcode: "",
     _id: null,
     uniqueId: null,
   });
@@ -59,6 +64,7 @@ const ProductPage = ({ params }: ProductPageProps) => {
       _id: idForUpdate ? productId : generateUID(),
       uniqueId: idForUpdate ? productId : generateUID(),
     };
+    formObj.qr = `${currentURL}${formObj._id}`;
     setFormValues(formObj);
     formValuesRef.current = formObj;
     console.log("formValues", formValues, formValuesRef.current);
@@ -76,6 +82,18 @@ const ProductPage = ({ params }: ProductPageProps) => {
     }
   }, [idForUpdate]);
 
+  React.useEffect(() => {
+    if (idForUpdate) {
+      const formObj = {
+        ...formValues,
+        qr: window.location.href,
+      };
+      setFormValues(formObj);
+      formValuesRef.current = formObj;
+      formValuesRef.current = formObj;
+    }
+  }, []);
+
   return (
     <main className="w-full">
       <HeaderSection
@@ -90,7 +108,7 @@ const ProductPage = ({ params }: ProductPageProps) => {
         )}
       </HeaderSection>
 
-      {/* <QRCode value={productId} /> */}
+      {/* {idForUpdate ? <QRCode value={formValues.qr} /> : ""} */}
 
       {/* {idForUpdate ? <svg ref={barcodeRef} /> : ""} */}
 

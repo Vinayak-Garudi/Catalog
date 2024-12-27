@@ -13,6 +13,11 @@ interface CardInterface {
   title?: string;
 }
 
+interface sizesObjProps {
+  label: string | number;
+  quantity: number;
+}
+
 const CardComponent: React.FC<CardInterface> = ({
   onPress,
   className = "",
@@ -23,12 +28,13 @@ const CardComponent: React.FC<CardInterface> = ({
   const [showInventory, setShowInventory] = React.useState(false);
   const [inventorySaving, setInventorySaving] = React.useState(false);
 
-  function onInventorySave() {
+  function onInventorySave(sizes: sizesObjProps[]) {
     setInventorySaving(true);
     setTimeout(() => {
+      console.log("sizes", sizes);
       setInventorySaving(false);
       setShowInventory(false);
-    }, 4000);
+    }, 3000);
   }
 
   return (
@@ -38,7 +44,7 @@ const CardComponent: React.FC<CardInterface> = ({
         isOpen={showInventory}
         inventorySaving={inventorySaving}
         onClose={() => setShowInventory(false)}
-        onSave={() => onInventorySave()}
+        onSave={(sizes: sizesObjProps[]) => onInventorySave(sizes)}
       ></InventoryModal>
       <Card
         shadow="sm"
