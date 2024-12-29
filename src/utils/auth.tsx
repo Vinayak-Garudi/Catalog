@@ -1,7 +1,8 @@
 export const handleLogOut = () => {
-  console.log("logged out");
-};
+  localStorage.clear();
+  const clearCookie = (name: string) => {
+    document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+  };
 
-export const handleLogIn = () => {
-  console.log("logged in");
+  clearCookie("token");
 };

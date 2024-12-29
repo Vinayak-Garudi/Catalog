@@ -8,9 +8,28 @@ interface ApiRequestOptions {
   headers?: HeadersInit;
 }
 
+const getCookie = (name: string): string | null => {
+  const nameEQ = name + "=";
+  const ca = document.cookie.split(";");
+
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i].trim();
+    if (c.indexOf(nameEQ) === 0) {
+      return c.substring(nameEQ.length, c.length);
+    }
+  }
+  return null;
+};
+
 export async function apiRequest<T>(
   endPoint: string,
-  { method = "GET", data = null, headers = {} }: ApiRequestOptions = {}
+  {
+    method = "GET",
+    data = null,
+    headers = {
+      Authorization: `Bearer ${getCookie("token")}`,
+    },
+  }: ApiRequestOptions = {}
 ): Promise<T> {
   const url = `${baseURL}/${endPoint}`;
 
